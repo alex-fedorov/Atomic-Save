@@ -18,7 +18,7 @@ function! AtomicSave()
   endif|
   " NOTE: vim's "rename" erroneously calls "unlink" on its target!
   " THIS DOES NOT WORK: if (rename(expand('<afile>').'.tmp', expand('<afile>')) == 0) | set nomodified | echo "error" | endif
-  call system('mv ' . l:tempfile . ' ' . l:filename)|
+  call system('cat ' . l:tempfile . ' | tee ' . l:filename)|
   if v:shell_error|
     echo "error renaming file: mv returned " . v:shell_error|
   else|
